@@ -27,7 +27,8 @@ public class ProductServiceImpl implements ProductService {
         if(productRepo.findById(productRqDTO.getProductID()).isPresent())
             throw new BadRequestException("Product ID Already Exist");
         String productType = productRqDTO.getProductType();
-        if(!productType.equals(ProductType.CA.name()) && !productType.equals(ProductType.SA.name()) && !productType.equals(ProductType.LENDING.name()) && !productType.equals(ProductType.INTERNAL.name()))
+        if(!productType.equals(ProductType.CA.name()) && !productType.equals(ProductType.SA.name()) && !productType.equals(ProductType.LENDING.name()) && !productType.equals(ProductType.INTERNAL.name())
+            &&!productType.equals(ProductType.FD.name()))
             throw new BadRequestException("Invalid Product Type.Product Type should be CA/SA/LENDING/INTERNAL");
         Product product = Product.builder().productID(productRqDTO.getProductID())
                         .productName(productRqDTO.getProductName())

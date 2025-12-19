@@ -11,40 +11,48 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/transaction")
 public class TransactionController {
 
     @Autowired
     private TransactionService transactionService;
 
     @PostMapping("/processTransaction")
+    @PreAuthorize("hasAuthority('TELLER')")
     public ResponseEntity<Object> processTransaction(@Valid @RequestBody TransactionRqDTO transactionRqDTO) throws BadRequestException, AccountNotFoundException {
         return ResponseHandler.generateSuccessResponse(transactionService.processTransaction(transactionRqDTO, TransactionCode.A00), HttpStatus.CREATED);
     }
 
     @GetMapping("/fetchTransactionByID/{transactionID}")
+    @PreAuthorize("hasAnyAuthority('TELLER','AUDITOR')")
     public ResponseEntity<Object> fetchTransactionByID(@PathVariable("transactionID") String transactionID) throws TransactionNotFoundException {
         return ResponseHandler.generateSuccessResponse(transactionService.fetchTransactionByID(transactionID), HttpStatus.OK);
     }
 
     @PutMapping("/blockAmount")
+    @PreAuthorize("hasAuthority('TELLER')")
     public ResponseEntity<Object> blockAmount(@Valid @RequestBody BlockTransactionDTO blockTransactionDTO) throws AccountNotFoundException, BadRequestException {
         return ResponseHandler.generateSuccessResponse(transactionService.blockAmount(blockTransactionDTO), HttpStatus.OK);
     }
 
     @PutMapping("/unBlockAmount")
+    @PreAuthorize("hasAuthority('TELLER')")
     public ResponseEntity<Object> unBlockAmount(@Valid @RequestBody UnBlockTransactionDTO unBlockTransactionDTO) throws BadRequestException, AccountNotFoundException {
         return ResponseHandler.generateSuccessResponse(transactionService.unBlockAmount(unBlockTransactionDTO), HttpStatus.OK);
     }
 
     @PutMapping("/processInterestApplication")
+    @PreAuthorize("hasAuthority('TELLER')")
     public ResponseEntity<Object> processInterestApplication(@Valid @RequestBody InterestApplicationRqDTO interestApplicationRqDTO) throws BadRequestException, AccountNotFoundException {
         return ResponseHandler.generateSuccessResponse(transactionService.processInterestApplication(interestApplicationRqDTO), HttpStatus.OK);
     }
 
     @PutMapping("/processInterestRateChange")
+    @PreAuthorize("hasAuthority('TELLER')")
     public ResponseEntity<Object> processInterestRateChange(@Valid @RequestBody InterestRateChangeRqDTO interestRateChangeRqDTO) throws BadRequestException, AccountNotFoundException {
         return ResponseHandler.generateSuccessResponse(transactionService.processInterestRateChange(interestRateChangeRqDTO), HttpStatus.OK);
     }

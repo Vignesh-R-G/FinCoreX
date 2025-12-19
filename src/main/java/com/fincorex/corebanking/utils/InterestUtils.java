@@ -10,12 +10,12 @@ import com.fincorex.corebanking.events.InterestHistoryEvent;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Date;
-import java.time.Period;
+import java.time.temporal.ChronoUnit;
 
 public class InterestUtils {
     public static BigDecimal calculateAccruedInterest(BigDecimal clearedBalance, BigDecimal interestRate, BigDecimal previousAccruedInterest, Date lastAccrualDate, Date currentDate){
         return previousAccruedInterest.add(
-                (clearedBalance.multiply(interestRate).multiply(BigDecimal.valueOf(Period.between(lastAccrualDate.toLocalDate(), currentDate.toLocalDate()).getDays())))
+                (clearedBalance.multiply(interestRate).multiply(BigDecimal.valueOf(ChronoUnit.DAYS.between(lastAccrualDate.toLocalDate(), currentDate.toLocalDate()))))
                         .divide(BigDecimal.valueOf(ApiConstants.INTEREST_BASE_DAYS * 100), 2, RoundingMode.HALF_UP)
         ).setScale(2, RoundingMode.HALF_UP);
     }

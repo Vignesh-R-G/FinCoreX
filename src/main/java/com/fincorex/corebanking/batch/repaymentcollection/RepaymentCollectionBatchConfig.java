@@ -1,6 +1,7 @@
 package com.fincorex.corebanking.batch.repaymentcollection;
 
 import com.fincorex.corebanking.entity.RepaymentCollectionTag;
+import com.fincorex.corebanking.exception.BadRequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
@@ -116,6 +117,9 @@ public class RepaymentCollectionBatchConfig {
                 .reader(reader)
                 .processor(processor)
                 .writer(writer)
+                .faultTolerant()
+                .skip(BadRequestException.class)
+                .skipLimit(10)   // allow up to 100 skips in this step
                 .build();
     }
 

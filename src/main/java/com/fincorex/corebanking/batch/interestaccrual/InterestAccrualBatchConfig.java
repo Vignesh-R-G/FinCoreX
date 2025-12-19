@@ -1,6 +1,7 @@
 package com.fincorex.corebanking.batch.interestaccrual;
 
 import com.fincorex.corebanking.entity.InterestAccrualTag;
+import com.fincorex.corebanking.exception.BadRequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
@@ -115,6 +116,9 @@ public class InterestAccrualBatchConfig {
                 .reader(reader)
                 .processor(processor)
                 .writer(writer)
+                .faultTolerant()
+                .skip(BadRequestException.class)
+                .skipLimit(10)   // allow up to 10 skips in this step
                 .build();
     }
 

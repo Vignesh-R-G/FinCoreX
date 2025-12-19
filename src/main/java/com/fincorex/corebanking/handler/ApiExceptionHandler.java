@@ -70,4 +70,5 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> badRequestException(BadRequestException badRequestException){
         return ResponseHandler.generateFailureResponse(badRequestException.getMessage(), HttpStatus.BAD_REQUEST);
     }
+
 }

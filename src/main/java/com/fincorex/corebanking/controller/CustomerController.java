@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,21 +19,25 @@ public class CustomerController {
     private CustomerService customerService;
 
     @PostMapping("/createCustomer")
+    @PreAuthorize("hasAuthority('TELLER')")
     public ResponseEntity<Object> createCustomer(@Valid @RequestBody CustomerRqDTO customerRqDTO) throws BadRequestException {
         return ResponseHandler.generateSuccessResponse(customerService.createCustomer(customerRqDTO), HttpStatus.CREATED);
     }
 
     @GetMapping("/fetchCustomer/{customerID}")
+    @PreAuthorize("hasAnyAuthority('TELLER','AUDITOR')")
     public ResponseEntity<Object> fetchCustomerByID(@PathVariable("customerID") String customerID) throws CustomerNotFoundException {
         return ResponseHandler.generateSuccessResponse(customerService.fetchCustomerByID(customerID), HttpStatus.OK);
     }
 
     @GetMapping("/fetchAllCustomers")
+    @PreAuthorize("hasAnyAuthority('TELLER','AUDITOR')")
     public ResponseEntity<Object> fetchAllCustomers(){
         return ResponseHandler.generateSuccessResponse(customerService.fetchAllCustomers(), HttpStatus.OK);
     }
 
     @PutMapping("/updateCustomerDetails")
+    @PreAuthorize("hasAuthority('TELLER')")
     public ResponseEntity<Object> updateCustomerDetails(@Valid @RequestBody CustomerRqDTO customerRqDTO) throws CustomerNotFoundException {
         return ResponseHandler.generateSuccessResponse(customerService.updateCustomerDetails(customerRqDTO), HttpStatus.OK);
     }

@@ -9,6 +9,7 @@ import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,6 +44,7 @@ public class BatchController {
     private JobLauncher jobLauncher;
 
     @PostMapping("/repayment/collection")
+    @PreAuthorize("hasAuthority('OPERATIONS_OFFICER')")
     public String executeRepaymentCollection() throws Exception {
         JobParameters params = new JobParametersBuilder()
                 .addLong("time", System.currentTimeMillis())
@@ -60,6 +62,7 @@ public class BatchController {
     }
 
     @PostMapping("/arrears/processing")
+    @PreAuthorize("hasAuthority('OPERATIONS_OFFICER')")
     public String executeArrearsProcessing() throws Exception {
         JobParameters params = new JobParametersBuilder()
                 .addLong("time", System.currentTimeMillis())
@@ -75,6 +78,7 @@ public class BatchController {
     }
 
     @PostMapping("/delinquency/marking")
+    @PreAuthorize("hasAuthority('OPERATIONS_OFFICER')")
     public String executeDelinquencyMarking() throws Exception {
         JobParameters params = new JobParametersBuilder()
                 .addLong("time", System.currentTimeMillis())
@@ -91,6 +95,7 @@ public class BatchController {
     }
 
     @PostMapping("/interest/accrual")
+    @PreAuthorize("hasAuthority('OPERATIONS_OFFICER')")
     public String executeInterestAccrual() throws Exception {
         JobParameters params = new JobParametersBuilder()
                 .addLong("time", System.currentTimeMillis())
@@ -107,6 +112,7 @@ public class BatchController {
     }
 
     @PostMapping("/interest/application")
+    @PreAuthorize("hasAuthority('OPERATIONS_OFFICER')")
     public String executeInterestApplication() throws Exception {
         JobParameters params = new JobParametersBuilder()
                 .addLong("time", System.currentTimeMillis())

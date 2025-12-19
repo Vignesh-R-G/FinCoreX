@@ -161,6 +161,8 @@ public class SubProductServiceImpl implements SubProductService {
             throw new BadRequestException("Interest Rates should be zero for the Internal Product");
         if(product.get().getProductType().equals(ProductType.SA.name()) && (!debitInterestRate.equals(BigDecimal.ZERO)))
             throw new BadRequestException("Debit Interest Rates should be zero for the Savings Product");
+        if(product.get().getProductType().equals(ProductType.FD.name()) && (!debitInterestRate.equals(BigDecimal.ZERO)))
+            throw new BadRequestException("Debit Interest Rates should be zero for the Fixed Deposits Product");
         if(product.get().getProductType().equals(ProductType.LENDING.name()) && (!creditInterestRate.equals(BigDecimal.ZERO)))
             throw new BadRequestException("Credit Interest Rates should be zero for the Lending Product");
 

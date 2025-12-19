@@ -1,6 +1,7 @@
 package com.fincorex.corebanking.batch.interestapplication;
 
 import com.fincorex.corebanking.entity.InterestApplicationTag;
+import com.fincorex.corebanking.exception.BadRequestException;
 import com.fincorex.corebanking.utils.BusinessDateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -121,6 +122,9 @@ public class InterestApplicationBatchConfig {
                 .reader(reader)
                 .processor(processor)
                 .writer(writer)
+                .faultTolerant()
+                .skip(BadRequestException.class)
+                .skipLimit(10)   // allow up to 10 skips in this step
                 .build();
     }
 

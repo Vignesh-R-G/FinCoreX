@@ -7,7 +7,9 @@ public enum TransactionCode {
     LD0("Loan Disbursement"),
     I00("Interest Application"),
     IA0("Interest Accrual"),
-    IA1("Interest Accrual Reversal");
+    IA1("Interest Accrual Reversal"),
+    FD0("Fixture Deposit"),
+    FD1("Fixture Withdrawal");
 
     private final String narration;
 

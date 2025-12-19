@@ -1,0 +1,2317 @@
+{
+	"info": {
+		"_postman_id": "4cb50ba0-de99-438c-b577-b028052e22d6",
+		"name": "FinCoreX",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26298729"
+	},
+	"item": [
+		{
+			"name": "Create Customer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"customerID\": \"\",\r\n  \"customerName\": \"Vignesh\",\r\n  \"customerDOB\": \"2025-12-13\",\r\n  \"customerAddress\": \"Bangalore\",\r\n  \"mobileNumber\": \"8072358827\",\r\n  \"gender\": \"M\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/customer/createCustomer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"customer",
+						"createCustomer"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://localhost:8090/customer/createCustomer' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"customerID\": \"string\",\r\n  \"customerName\": \"string\",\r\n  \"customerDOB\": \"2025-12-13T05:06:19.003Z\",\r\n  \"customerAddress\": \"string\",\r\n  \"mobileNumber\": \"string\",\r\n  \"gender\": \"string\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Customer By ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/customer/fetchCustomer/CUST1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"customer",
+						"fetchCustomer",
+						"CUST1"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://localhost:8090/customer/fetchCustomer/CUST1' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch All Customers",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/customer/fetchAllCustomers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"customer",
+						"fetchAllCustomers"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://localhost:8090/customer/fetchAllCustomers' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Branch",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"branchCode\": \"BRANCH02\",\r\n  \"branchName\": \"KORAMANGALA BRANCH\",\r\n  \"isHeadOffice\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/branch/createBranch",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"branch",
+						"createBranch"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://localhost:8090/branch/createBranch' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"branchCode\": \"string\",\r\n  \"branchName\": \"string\",\r\n  \"isHeadOffice\": true\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Branch Details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/branch/fetchBranchDetails/BRANCH02",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"branch",
+						"fetchBranchDetails",
+						"BRANCH02"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://localhost:8090/branch/fetchBranchDetails/BRANCH01' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch All Branch Details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/branch/fetchAllBranchDetails",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"branch",
+						"fetchAllBranchDetails"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://localhost:8090/branch/fetchAllBranchDetails' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"productID\": \"fixdep\",\r\n  \"productName\": \"Fixed Deposit\",\r\n  \"productType\": \"FD\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/product/createProduct",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"product",
+						"createProduct"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://localhost:8090/product/createProduct' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"productID\": \"string\",\r\n  \"productName\": \"string\",\r\n  \"productType\": \"string\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Product By ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/product/fetchProductByID/savings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"product",
+						"fetchProductByID",
+						"savings"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://localhost:8090/product/fetchProductByID/savings' \\\r\n  -H 'accept: */*' \\\r\n  -d ''"
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch All Products",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/product/fetchAllProducts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"product",
+						"fetchAllProducts"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://localhost:8090/product/fetchAllProducts' \\\r\n  -H 'accept: */*' \\\r\n  -d ''"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Business Date",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/businessDate/getBusinessDate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"businessDate",
+						"getBusinessDate"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://localhost:8090/getBusinessDate' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Business Date",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"businessDate\": \"2026-10-03\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/businessDate/updateBusinessDate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"businessDate",
+						"updateBusinessDate"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'PUT' \\\r\n  'http://localhost:8090/updateBusinessDate' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"businessDate\": \"2025-12-13T15:44:29.272Z\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Delinquency Profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"profileDescription\": \"FIRST PROFILE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/delinquency/createDelinquencyProfile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"delinquency",
+						"createDelinquencyProfile"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://localhost:8090/createDelinquencyProfile' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"profileDescription\": \"string\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Delinquency Profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"profileDescription\": \"FIRST DLN PROFILE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/delinquency/updateDelinquencyProfile/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"delinquency",
+						"updateDelinquencyProfile",
+						"6"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'PUT' \\\r\n  'http://localhost:8090/updateDelinquencyProfile/1' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"profileDescription\": \"string\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Delinquency Details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/delinquency/fetchDelinquencyDetails/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"delinquency",
+						"fetchDelinquencyDetails",
+						"6"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://localhost:8090/fetchDelinquencyDetails/5' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Delinquency Stage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"stageDescription\": \"FOURTH\",\r\n  \"overDueDays\": 30,\r\n  \"delinquencyProfileID\": 6\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/delinquency/createDelinquencyStage",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"delinquency",
+						"createDelinquencyStage"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://localhost:8090/createDelinquencyStage' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"stageDescription\": \"string\",\r\n  \"overDueDays\": 0,\r\n  \"delinquencyProfileID\": 0\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Bulk Delinquency Stage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  {\r\n    \"stageDescription\": \"ONE\",\r\n    \"overDueDays\": 1,\r\n    \"delinquencyProfileID\": 6\r\n  },\r\n  {\r\n    \"stageDescription\": \"TWO\",\r\n    \"overDueDays\": 10,\r\n    \"delinquencyProfileID\": 6\r\n  },\r\n  {\r\n    \"stageDescription\": \"THIRD\",\r\n    \"overDueDays\": 20,\r\n    \"delinquencyProfileID\": 6\r\n  },\r\n  {\r\n    \"stageDescription\": \"FOURTH\",\r\n    \"overDueDays\": 30,\r\n    \"delinquencyProfileID\": 6\r\n  }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/delinquency/createBulkDelinquencyStage",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"delinquency",
+						"createBulkDelinquencyStage"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://localhost:8090/createBulkDelinquencyStage' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '[\r\n  {\r\n    \"stageDescription\": \"string\",\r\n    \"overDueDays\": 0,\r\n    \"delinquencyProfileID\": 0\r\n  }\r\n]'"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Delinquency Stage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"stageDescription\": \"FOUTH DLN\",\r\n  \"overDueDays\": 30,\r\n  \"delinquencyProfileID\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/delinquency/updateDelinquencyStage/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"delinquency",
+						"updateDelinquencyStage",
+						"4"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'PUT' \\\r\n  'http://localhost:8090/updateDelinquencyStage/4' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"stageDescription\": \"string\",\r\n  \"overDueDays\": 0,\r\n  \"delinquencyProfileID\": 0\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Delinquency Stage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/delinquency/fetchDelinquencyStage/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"delinquency",
+						"fetchDelinquencyStage",
+						"4"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://localhost:8090/fetchDelinquencyStage/5' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Sub Products By Product With Pagination",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/product/fetchSubProductsByProduct/Internal/pagination?pageNumber=0&pageSize=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"product",
+						"fetchSubProductsByProduct",
+						"Internal",
+						"pagination"
+					],
+					"query": [
+						{
+							"key": "pageNumber",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://localhost:8090/fetchSubProductsByProduct/Internal/pagination?pageNumber=1&pageSize=1' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Delinquency Stage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/delinquency/deleteDelinquencyStage/8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"delinquency",
+						"deleteDelinquencyStage",
+						"8"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'DELETE' \\\r\n  'http://localhost:8090/deleteDelinquencyStage/5' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Sub Product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"productContextCode\": \"04020\",\r\n  \"debitInterestRate\": 0,\r\n  \"creditInterestRate\": 10,\r\n  \"interestMethod\": \"NORMAL\",\r\n  \"isoCurrencyCode\": \"USD\",\r\n  \"pnlAccount\": \"ACCBRANCH011\",\r\n  \"glAccount\": \"ACCBRANCH021\",\r\n  \"productID\": \"fixdep\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/product/createSubProduct",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"product",
+						"createSubProduct"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://localhost:8090/createSubProduct' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"productContextCode\": \"string\",\r\n  \"debitInterestRate\": 0,\r\n  \"creditInterestRate\": 0,\r\n  \"interestMethod\": \"string\",\r\n  \"isoCurrencyCode\": \"string\",\r\n  \"pnlAccount\": \"string\",\r\n  \"glAccount\": \"string\",\r\n  \"productID\": \"string\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Sub Products By Product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/product/fetchSubProductsByProduct/Internal",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"product",
+						"fetchSubProductsByProduct",
+						"Internal"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://localhost:8090/fetchSubProductsByProduct/11111' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Sub Product By ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/product/fetchSubProductByID/22222",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"product",
+						"fetchSubProductByID",
+						"22222"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://localhost:8090/fetchSubProductByID/11111' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Sub Product By Currency",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/product/fetchSubProductByCurrency/USD",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"product",
+						"fetchSubProductByCurrency",
+						"USD"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://localhost:8090/fetchSubProductByCurrency/USD' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Sub Product Details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"productContextCode\": \"11111\",\r\n  \"debitInterestRate\": 0,\r\n  \"creditInterestRate\": 0,\r\n  \"interestMethod\": \"NORMAL\",\r\n  \"isoCurrencyCode\": \"USD\",\r\n  \"pnlAccount\": \"\",\r\n  \"glAccount\": \"\",\r\n  \"productID\": \"Internal\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/product/updateSubProductDetails",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"product",
+						"updateSubProductDetails"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'PUT' \\\r\n  'http://localhost:8090/updateSubProductDetails' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"productContextCode\": \"string\",\r\n  \"debitInterestRate\": 0,\r\n  \"creditInterestRate\": 0,\r\n  \"interestMethod\": \"string\",\r\n  \"isoCurrencyCode\": \"string\",\r\n  \"pnlAccount\": \"string\",\r\n  \"glAccount\": \"string\",\r\n  \"productID\": \"string\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Open Account",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"customerID\": \"CUST1\",\r\n  \"branchCode\": \"BRANCH02\",\r\n  \"subProductID\": \"02010\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/account/openAccount",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"account",
+						"openAccount"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://localhost:8090/openAccount' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"accountID\": \"string\",\r\n  \"customerID\": \"string\",\r\n  \"branchCode\": \"string\",\r\n  \"subProductID\": \"string\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Find Accounts By SubProduct",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/account/findAccountsBySubProduct/02010?pageNumber=0&pageSize=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"account",
+						"findAccountsBySubProduct",
+						"02010"
+					],
+					"query": [
+						{
+							"key": "pageNumber",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://localhost:8090/findAccountsBySubProduct/02010?pageNumber=1&pageSize=10' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Find Accounts By Customer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/account/findAccountsByCustomer/CUST1?pageNumber=0&pageSize=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"account",
+						"findAccountsByCustomer",
+						"CUST1"
+					],
+					"query": [
+						{
+							"key": "pageNumber",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://localhost:8090/findAccountsByCustomer/CUST1?pageNumber=0&pageSize=10' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Find Account By ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/account/findAccountByID/ACCCUST11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"account",
+						"findAccountByID",
+						"ACCCUST11"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://localhost:8090/findAccountByID/ACCCUST11' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Process Transaction",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"transactionDetails\": [\r\n    {\r\n      \"accountID\": \"ACCCUST14\",\r\n      \"amount\": 1000000,\r\n      \"debitCreditFlag\": \"C\"\r\n    },\r\n    {\r\n      \"accountID\": \"ACCBRANCH011\",\r\n      \"amount\": -1000000,\r\n      \"debitCreditFlag\": \"D\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/transaction/processTransaction",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"transaction",
+						"processTransaction"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://localhost:8090/processTransaction' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"transactionDetails\": [\r\n    {\r\n      \"accountID\": \"string\",\r\n      \"amount\": 0,\r\n      \"debitCreditFlag\": \"string\"\r\n    }\r\n  ]\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Transaction By ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/transaction/fetchTransactionByID/4f47352139",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"transaction",
+						"fetchTransactionByID",
+						"4f47352139"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://localhost:8090/fetchTransactionByID/4f47352139' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Block Amount",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"accountID\": \"ACCCUST11\",\r\n  \"blockAmount\": 1000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/transaction/blockAmount",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"transaction",
+						"blockAmount"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://localhost:8090/blockAmount' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"accountID\": \"ACCCUST11\",\r\n  \"blockAmount\": 0\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "UnBlock Amount",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"accountID\": \"ACCCUST11\",\r\n  \"unBlockAmount\": 1000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/transaction/unBlockAmount",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"transaction",
+						"unBlockAmount"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://localhost:8090/unBlockAmount' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"accountID\": \"string\",\r\n  \"unBlockAmount\": 0\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Account Balance",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/account/getAccountBalance/ACCCUST11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"account",
+						"getAccountBalance",
+						"ACCCUST11"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://localhost:8090/getAccountBalance/ACCCUST11' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Interest Details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/account/getInterestDetails/ACCCUST14",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"account",
+						"getInterestDetails",
+						"ACCCUST14"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://localhost:8090/getInterestDetails/ACCCUST11' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Process Interest Rate Change",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"accountID\": \"ACCCUST11\",\r\n  \"interestRateType\":\"C\",\r\n  \"interestRate\": 15\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/transaction/processInterestRateChange",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"transaction",
+						"processInterestRateChange"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'PUT' \\\r\n  'http://localhost:8090/processInterestRateChange' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"accountID\": \"string\",\r\n  \"interestRateType\": \"string\",\r\n  \"interestRate\": 0\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Interest Accrual Batch",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/batch/interest/accrual",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"batch",
+						"interest",
+						"accrual"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://localhost:8090/batch/interest/accrual' \\\r\n  -H 'accept: */*' \\\r\n  -d ''"
+			},
+			"response": []
+		},
+		{
+			"name": "Process Interest Application",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"accountID\": \"ACCCUST11\",\r\n  \"interestApplicationType\": \"C\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/transaction/processInterestApplication",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"transaction",
+						"processInterestApplication"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'PUT' \\\r\n  'http://localhost:8090/processInterestApplication' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"accountID\": \"string\",\r\n  \"interestApplicationType\": \"string\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Establish Loan",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"openAccountRqDTO\": {\r\n    \"customerID\": \"CUST1\",\r\n    \"branchCode\": \"BRANCH01\",\r\n    \"subProductID\": \"05010\"\r\n  },\r\n  \"lookAheadDays\": 5,\r\n  \"delinquencyProfileID\": 6,\r\n  \"loanAmount\": -10000,\r\n  \"loanTermInMonths\": 10,\r\n  \"fixedInterestAmount\": 1000,\r\n  \"settlementAccount\": \"ACCCUST14\",\r\n  \"disbursementAccount\": \"ACCCUST14\",\r\n  \"collectionOrderProfile\": \"PI\",\r\n  \"collectionOrderType\": \"H\"\r\n//   \"loanScheduleRqDTOList\": [\r\n//     {\r\n//       \"interestDue\": 0,\r\n//       \"principalDue\": 0\r\n//     }\r\n//   ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/lending/establishLoan",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"lending",
+						"establishLoan"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://localhost:8090/establishLoan' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"openAccountRqDTO\": {\r\n    \"customerID\": \"string\",\r\n    \"branchCode\": \"string\",\r\n    \"subProductID\": \"string\"\r\n  },\r\n  \"lookAheadDays\": 0,\r\n  \"delinquencyProfileID\": 0,\r\n  \"loanAmount\": 0,\r\n  \"loanTermInMonths\": 0,\r\n  \"fixedInterestAmount\": 0,\r\n  \"settlementAccount\": \"string\",\r\n  \"disbursementAccount\": \"string\",\r\n  \"collectionOrderProfile\": \"string\",\r\n  \"collectionOrderType\": \"string\",\r\n  \"loanScheduleRqDTOList\": [\r\n    {\r\n      \"interestDue\": 0,\r\n      \"principalDue\": 0\r\n    }\r\n  ]\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Establish Loan with Manual Schedule",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"openAccountRqDTO\": {\r\n    \"customerID\": \"CUST1\",\r\n    \"branchCode\": \"BRANCH01\",\r\n    \"subProductID\": \"05010\"\r\n  },\r\n  \"lookAheadDays\": 5,\r\n  \"delinquencyProfileID\": 6,\r\n  \"loanAmount\": -3000,\r\n  \"loanTermInMonths\": 3,\r\n  \"fixedInterestAmount\": 300,\r\n  \"settlementAccount\": \"ACCCUST11\",\r\n  \"disbursementAccount\": \"ACCCUST11\",\r\n  \"collectionOrderProfile\": \"PI\",\r\n  \"collectionOrderType\": \"H\",\r\n  \"loanScheduleRqDTOList\": [\r\n        {\r\n        \"interestDue\": 50,\r\n        \"principalDue\": 500\r\n        },\r\n        {\r\n        \"interestDue\": 150,\r\n        \"principalDue\": 1000\r\n        },\r\n        {\r\n        \"interestDue\": 100,\r\n        \"principalDue\": 1500\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/lending/establishLoan",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"lending",
+						"establishLoan"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://localhost:8090/establishLoan' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"openAccountRqDTO\": {\r\n    \"customerID\": \"string\",\r\n    \"branchCode\": \"string\",\r\n    \"subProductID\": \"string\"\r\n  },\r\n  \"lookAheadDays\": 0,\r\n  \"delinquencyProfileID\": 0,\r\n  \"loanAmount\": 0,\r\n  \"loanTermInMonths\": 0,\r\n  \"fixedInterestAmount\": 0,\r\n  \"settlementAccount\": \"string\",\r\n  \"disbursementAccount\": \"string\",\r\n  \"collectionOrderProfile\": \"string\",\r\n  \"collectionOrderType\": \"string\",\r\n  \"loanScheduleRqDTOList\": [\r\n    {\r\n      \"interestDue\": 0,\r\n      \"principalDue\": 0\r\n    }\r\n  ]\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Loan Details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/lending/fetchLoanDetails/ACCCUST12",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"lending",
+						"fetchLoanDetails",
+						"ACCCUST12"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://localhost:8090/fetchLoanDetails/ACCCUST13' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Arrears Processing",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/batch/arrears/processing",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"batch",
+						"arrears",
+						"processing"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://localhost:8090/batch/arrears/processing' \\\r\n  -H 'accept: */*' \\\r\n  -d ''"
+			},
+			"response": []
+		},
+		{
+			"name": "Delinquency Marking",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/batch/delinquency/marking",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"batch",
+						"delinquency",
+						"marking"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://localhost:8090/batch/delinquency/marking' \\\r\n  -H 'accept: */*' \\\r\n  -d ''"
+			},
+			"response": []
+		},
+		{
+			"name": "Repayment Collection",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/batch/repayment/collection",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"batch",
+						"repayment",
+						"collection"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://localhost:8090/batch/repayment/collection' \\\r\n  -H 'accept: */*' \\\r\n  -d ''"
+			},
+			"response": []
+		},
+		{
+			"name": "Interest Application Batch",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/batch/interest/application",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"batch",
+						"interest",
+						"application"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://localhost:8090/batch/interest/application' \\\r\n  -H 'accept: */*' \\\r\n  -d ''"
+			},
+			"response": []
+		},
+		{
+			"name": "Close Account",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"accountID\": \"ACCCUST13\",\r\n  \"closureReason\": \"Customer Request\",\r\n  \"payAwayAccount\": \"ACCBRANCH011\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/account/closeAccount",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"account",
+						"closeAccount"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'PUT' \\\r\n  'http://localhost:8090/closeAccount' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"accountID\": \"string\",\r\n  \"closureReason\": \"string\",\r\n  \"payAwayAccount\": \"string\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Open Fixed Deposit",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"openAccountRqDTO\": {\r\n    \"customerID\": \"string\",\r\n    \"branchCode\": \"string\",\r\n    \"subProductID\": \"string\"\r\n  },\r\n  \"fixtureAmount\": 0,\r\n  \"term\": 0,\r\n  \"fundingAccount\": \"string\",\r\n  \"payAwayAccount\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/fixture/openFixedDeposit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"fixture",
+						"openFixedDeposit"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://localhost:8090/openFixedDeposit' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"openAccountRqDTO\": {\r\n    \"customerID\": \"string\",\r\n    \"branchCode\": \"string\",\r\n    \"subProductID\": \"string\"\r\n  },\r\n  \"fixtureAmount\": 0,\r\n  \"term\": 0,\r\n  \"fundingAccount\": \"string\",\r\n  \"payAwayAccount\": \"string\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Enquire Fixed Deposit",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/fixture/fetchFixedDepositDetails/ACCCUST16",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"fixture",
+						"fetchFixedDepositDetails",
+						"ACCCUST16"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://localhost:8090/fetchFixedDepositDetails/ACCCUST16' \\\r\n  -H 'accept: */*' \\\r\n  -d ''"
+			},
+			"response": []
+		},
+		{
+			"name": "Process Fixture Breakage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/fixture/processFixtureBreakage/ACCCUST16",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"fixture",
+						"processFixtureBreakage",
+						"ACCCUST16"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'PUT' \\\r\n  'http://localhost:8090/processFixtureBreakage/ACCCUST16' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Loan Settlement",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT_TOKEN}}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/lending/settleLoanAccount/ACCCUST17",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"lending",
+						"settleLoanAccount",
+						"ACCCUST17"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'http://localhost:8090/settleLoanAccount/ACCCUST17' \\\r\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"brad\",\r\n  \"password\": \"brad\",\r\n  \"roles\": \"TELLER\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/auth/createUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"auth",
+						"createUser"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://localhost:8090/auth/createUser' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"userName\": \"brad\",\r\n  \"password\": \"brad\",\r\n  \"roles\": \"ADMIN\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Login User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"// Extract token from response (adjust key name if different)\r",
+							"let token = jsonData.data.authToken;\r",
+							"\r",
+							"// Check if token exists\r",
+							"if (token) {\r",
+							"    // Set environment variable with Bearer prefix\r",
+							"    pm.environment.set(\"JWT_TOKEN\", token);\r",
+							"    console.log(\"Token saved to environment: \" + token);\r",
+							"} else {\r",
+							"    console.warn(\"No token found in response!\");\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"brad\",\r\n  \"password\": \"brad\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/auth/loginUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"auth",
+						"loginUser"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://localhost:8090/auth/loginUser' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"userName\": \"string\",\r\n  \"password\": \"string\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Generate Token Using Refresh Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"let jsonData = pm.response.json();\r",
+							"\r",
+							"// Extract token from response (adjust key name if different)\r",
+							"let token = jsonData.data.authToken;\r",
+							"\r",
+							"// Check if token exists\r",
+							"if (token) {\r",
+							"    // Set environment variable with Bearer prefix\r",
+							"    pm.environment.set(\"JWT_TOKEN\", token);\r",
+							"    console.log(\"Token saved to environment: \" + token);\r",
+							"} else {\r",
+							"    console.warn(\"No token found in response!\");\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"refreshToken\": \"485b8db2-583e-4855-a740-c5a3c127e678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/auth/generateTokenUsingRefreshToken",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"auth",
+						"generateTokenUsingRefreshToken"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\r\n  'http://localhost:8090/auth/generateTokenUsingRefreshToken' \\\r\n  -H 'accept: */*' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"refreshToken\": \"string\"\r\n}'"
+			},
+			"response": []
+		}
+	]
+}

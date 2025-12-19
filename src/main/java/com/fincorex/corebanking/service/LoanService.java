@@ -7,4 +7,5 @@ import com.fincorex.corebanking.exception.*;
 public interface LoanService {
     public LoanAccountRsDTO establishLoan (LoanEstablishmentRqDTO loanEstablishmentRqDTO) throws SubProductNotFoundException, BranchNotFoundException, CustomerNotFoundException, BadRequestException, DelinquencyProfileNotFoundException, AccountNotFoundException;
     public LoanAccountRsDTO fetchLoanDetails (String loanAccountID) throws BadRequestException;
+    public String settleLoanAccount(String loanAccountID) throws BadRequestException, AccountNotFoundException;
 }

@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,16 +19,19 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping("/createProduct")
+    @PreAuthorize("hasAuthority('TELLER')")
     public ResponseEntity<Object> createProduct(@Valid @RequestBody ProductRqDTO productRqDTO) throws BadRequestException {
         return ResponseHandler.generateSuccessResponse(productService.createProduct(productRqDTO), HttpStatus.CREATED);
     }
 
     @PostMapping("/fetchProductByID/{productID}")
+    @PreAuthorize("hasAnyAuthority('TELLER','AUDITOR')")
     public ResponseEntity<Object> fetchProductByID(@PathVariable("productID") String productID) throws ProductNotFoundException {
         return ResponseHandler.generateSuccessResponse(productService.fetchProductByID(productID), HttpStatus.OK);
     }
 
     @PostMapping("/fetchAllProducts")
+    @PreAuthorize("hasAnyAuthority('TELLER','AUDITOR')")
     public ResponseEntity<Object> fetchAllProducts() {
         return ResponseHandler.generateSuccessResponse(productService.fetchAllProducts(), HttpStatus.OK);
     }

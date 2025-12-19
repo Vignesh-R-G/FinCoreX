@@ -12,8 +12,6 @@ import com.fincorex.corebanking.service.LoanService;
 import com.fincorex.corebanking.service.TransactionService;
 import com.fincorex.corebanking.utils.BusinessDateUtil;
 import com.fincorex.corebanking.utils.TransactionUtils;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,8 +54,8 @@ public class LoanServiceImpl implements LoanService {
     @Autowired
     private TransactionUtils transactionUtils;
 
-    @PersistenceContext
-    private EntityManager em;
+    @Autowired
+    private LendingBlocksRepo lendingBlocksRepo;
 
 
     @Transactional(rollbackFor = {
@@ -90,7 +88,7 @@ public class LoanServiceImpl implements LoanService {
             throw new BadRequestException("Disbursement Account should be a savings Account");
 
         // Open Account Service
-        AccountRsDTO accountRsDTO =  accountService.openAccount(loanEstablishmentRqDTO.getOpenAccountRqDTO(), Boolean.TRUE);
+        AccountRsDTO accountRsDTO =  accountService.openAccount(loanEstablishmentRqDTO.getOpenAccountRqDTO(), Boolean.TRUE, Boolean.FALSE);
 
         Account account = accountRepo.findById(accountRsDTO.getAccountID()).get();
         Date businessDate = businessDateUtil.getCurrentBusinessDate();
@@ -130,6 +128,55 @@ public class LoanServiceImpl implements LoanService {
         if(loanDetails.isEmpty())
             throw new BadRequestException("Invalid Loan Account");
         return buildLoanAccountRsDTO(loanDetails.get());
+    }
+
+    @Transactional(rollbackFor = {Exception.class})
+    @Override
+    public String settleLoanAccount(String loanAccountID) throws BadRequestException, AccountNotFoundException {
+        Optional<LoanDetails> loanDetailsOptional = loanDetailsRepo.findById(loanAccountID);
+        if(loanDetailsOptional.isEmpty()){
+            throw new BadRequestException("Invalid Loan Account");
+        }
+
+        LoanDetails loanDetails = loanDetailsOptional.get();
+
+        if(loanDetails.getLoanStatus().equals(LoanStatus.SETTLED.name()) || loanDetails.getLoanStatus().equals(LoanStatus.COMPLETED.name()))
+            throw new BadRequestException("Loan is already settled or completed");
+
+        // Unblock Existing Block
+        Optional<LendingBlocks> lendingBlocksOptional = lendingBlocksRepo.findById(loanAccountID);
+        if(lendingBlocksOptional.isPresent()){
+            LendingBlocks lendingBlocks = lendingBlocksOptional.get();
+            UnBlockTransactionDTO unBlockTransactionDTO = UnBlockTransactionDTO.builder()
+                    .accountID(lendingBlocks.getSettlementAccountID())
+                    .unBlockAmount(lendingBlocks.getBlockAmount())
+                    .build();
+            transactionService.unBlockAmount(unBlockTransactionDTO);
+        }
+
+        Account account = accountRepo.findById(loanDetails.getSettlementAccount().getAccountID()).get();
+        BigDecimal availableBalance = account.getClearedBalance().subtract(account.getBlockedBalance());
+
+        // Persist Missed Repayments
+        persistMissedRepayments(loanDetails);
+
+        BigDecimal totalArrearsAmount = fetchTotalUnpaidAmount(loanDetails);
+        BigDecimal totalOutstandingAmount = fetchOutstandingAmount(loanDetails);
+        BigDecimal settlementAmount = totalArrearsAmount.add(totalOutstandingAmount);
+
+        if(availableBalance.compareTo(settlementAmount) < 0)
+            throw new BadRequestException("Available Balance is lesser than the Settlement Amount");
+
+        // Settlement Transaction
+        processLoanRepayment(loanDetails, settlementAmount);
+
+        // Removal of lending blocks if it is present
+        lendingBlocksOptional.ifPresent(lendingBlocks -> lendingBlocksRepo.delete(lendingBlocks));
+
+        // Update Loan Status
+        updateLoanStatus(loanAccountID, LoanStatus.SETTLED);
+
+        return "Loan Account Settlement is Successful for this Account ID : "+loanAccountID;
     }
 
     private void validateLookAheadDays(long lookAheadDays) throws BadRequestException {
@@ -181,19 +228,34 @@ public class LoanServiceImpl implements LoanService {
     }
 
     public void processLoanRepayment(LoanDetails loanDetails, BigDecimal repaymentAmount) throws BadRequestException, AccountNotFoundException {
+        BigDecimal totalInterestAmountPaid = BigDecimal.ZERO;
+        // Additional Payments will not be appropriated
+        BigDecimal totalArrearsAmount = fetchTotalUnpaidAmount(loanDetails);
+        if(repaymentAmount.compareTo(totalArrearsAmount) <= 0)
+            totalInterestAmountPaid = handleLoanAppropriation(loanDetails, repaymentAmount);
+        else {
+            // Additional Payment
+            totalInterestAmountPaid = handleLoanAppropriation(loanDetails, totalArrearsAmount).add(fetchInterestOutstandingAmount(loanDetails));
+        }
+
+        // Repayment Transaction
         List<TransactionDetailsRqDTO> transactionDetailsRqDTOList = new ArrayList<>();
         transactionDetailsRqDTOList.add(transactionUtils.prepareTransactionDetailsRequest(loanDetails.getSettlementAccount().getAccountID(), repaymentAmount.negate(), 'D'));
         transactionDetailsRqDTOList.add(transactionUtils.prepareTransactionDetailsRequest(loanDetails.getLoanAccountID(), repaymentAmount, 'C'));
+        transactionDetailsRqDTOList.add(transactionUtils.prepareTransactionDetailsRequest(loanDetails.getLoanAccountID(), totalInterestAmountPaid.negate(), 'D'));
+        transactionDetailsRqDTOList.add(transactionUtils.prepareTransactionDetailsRequest(loanDetails.getAccount().getSubProduct().getGlAccount(),totalInterestAmountPaid, 'C'));
+
 
         TransactionRqDTO transactionRqDTO = TransactionRqDTO.builder()
                 .transactionDetails(transactionDetailsRqDTOList)
                 .build();
         transactionService.processTransaction(transactionRqDTO, TransactionCode.RPO);
 
-        handleLoanAppropriation(loanDetails, repaymentAmount);
+        loanDetails.setFixedInterestAmount(loanDetails.getFixedInterestAmount().subtract(totalInterestAmountPaid));
+        loanDetailsRepo.save(loanDetails);
     }
 
-    public void handleLoanAppropriation(LoanDetails loanDetails, BigDecimal repaymentAmount) throws BadRequestException, AccountNotFoundException {
+    public BigDecimal handleLoanAppropriation(LoanDetails loanDetails, BigDecimal repaymentAmount) throws BadRequestException, AccountNotFoundException {
         String collectionOrderProfile = loanDetails.getCollectionOrderProfile();
         Character collectionOrderType = loanDetails.getCollectionOrderType();
 
@@ -259,16 +321,7 @@ public class LoanServiceImpl implements LoanService {
             loanRepaymentsRepo.save(loanRepayment);
         }
 
-        // Interest Application
-        List<TransactionDetailsRqDTO> transactionDetailsRqDTOList = new ArrayList<>();
-        transactionDetailsRqDTOList.add(transactionUtils.prepareTransactionDetailsRequest(loanDetails.getLoanAccountID(), totalInterestAmountPaid.negate(), 'D'));
-        transactionDetailsRqDTOList.add(transactionUtils.prepareTransactionDetailsRequest(loanDetails.getAccount().getSubProduct().getGlAccount(), totalInterestAmountPaid, 'C'));
-
-        TransactionRqDTO transactionRqDTO = TransactionRqDTO.builder()
-                .transactionDetails(transactionDetailsRqDTOList)
-                .build();
-        transactionService.processTransaction(transactionRqDTO, TransactionCode.RPO);
-
+        return totalInterestAmountPaid;
     }
 
     public void persistMissedRepayments(LoanDetails loanDetails){
@@ -432,6 +485,32 @@ public class LoanServiceImpl implements LoanService {
             totalArrearAmount = totalArrearAmount.add(loanRepayment.getTotalRepaymentOverDue());
         }
         return totalArrearAmount;
+    }
+
+    public BigDecimal fetchOutstandingAmount(LoanDetails loanDetails){
+        List<LoanSchedule> loanScheduleList = loanDetails.getLoanSchedules();
+        BigDecimal totalOutstandingAmount = BigDecimal.ZERO;
+        for(LoanSchedule loanSchedule : loanScheduleList){
+            if(loanSchedule.getRepaymentDate().toLocalDate().isAfter(businessDateUtil.getCurrentBusinessDate().toLocalDate()))
+                totalOutstandingAmount = totalOutstandingAmount.add(loanSchedule.getRepaymentDue());
+        }
+        return totalOutstandingAmount;
+    }
+
+    public BigDecimal fetchInterestOutstandingAmount(LoanDetails loanDetails){
+        List<LoanSchedule> loanScheduleList = loanDetails.getLoanSchedules();
+        BigDecimal totalInterestOutstandingAmount = BigDecimal.ZERO;
+        for(LoanSchedule loanSchedule : loanScheduleList){
+            if(loanSchedule.getRepaymentDate().toLocalDate().isAfter(businessDateUtil.getCurrentBusinessDate().toLocalDate()))
+                totalInterestOutstandingAmount = totalInterestOutstandingAmount.add(loanSchedule.getInterestDue());
+        }
+        return totalInterestOutstandingAmount;
+    }
+
+    public void updateLoanStatus(String loanAccountID, LoanStatus loanStatus){
+        LoanDetails loanDetails = loanDetailsRepo.findById(loanAccountID).get();
+        loanDetails.setLoanStatus(loanStatus.name());
+        loanDetailsRepo.save(loanDetails);
     }
 
     public LoanScheduleRsDTO buildLoanScheduleRsDTO(LoanSchedule loanSchedule){

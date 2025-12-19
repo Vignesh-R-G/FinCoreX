@@ -70,11 +70,14 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private LoanDetailsRepo loanDetailsRepo;
 
+    @Autowired
+    private FixtureRepo fixtureRepo;
+
     @Override
     @Transactional(rollbackFor = {Exception.class})
     // If it is a checked Exception, then we have to explicitly mention it
     // By default, Spring auto roll back only for unchecked Exception
-    public synchronized AccountRsDTO openAccount(OpenAccountRqDTO openAccountRqDTO, Boolean isInvokedFromLoanService) throws BranchNotFoundException, CustomerNotFoundException, SubProductNotFoundException, BadRequestException {
+    public synchronized AccountRsDTO openAccount(OpenAccountRqDTO openAccountRqDTO, Boolean isInvokedFromLoanService, Boolean isInvokedFromFixtureService) throws BranchNotFoundException, CustomerNotFoundException, SubProductNotFoundException, BadRequestException {
         Optional<Branch> branch = branchRepo.findById(openAccountRqDTO.getBranchCode());
         if(branch.isEmpty())
             throw new BranchNotFoundException("Branch Not Found");
@@ -85,6 +88,12 @@ public class AccountServiceImpl implements AccountService {
             throw new BadRequestException("Loan Accounts should be established using the Loan Establishment API");
         if(isInvokedFromLoanService && !productInheritance.get().getProduct().getProductType().equals(ProductType.LENDING.name()))
             throw new BadRequestException("Invalid Sub-Product. Loan Sub-Product should be provided to establish a loan");
+
+        if(!isInvokedFromFixtureService && productInheritance.get().getProduct().getProductType().equals(ProductType.FD.name()))
+            throw new BadRequestException("Fixed Deposits should be created using the Fixed Deposit API API");
+        if(isInvokedFromFixtureService && !productInheritance.get().getProduct().getProductType().equals(ProductType.FD.name()))
+            throw new BadRequestException("Invalid Sub-Product. Fixed Deposits Sub-Product should be provided to establish an FD Account");
+
         Optional<Customer> customer = customerRepo.findById(openAccountRqDTO.getCustomerID());
 
         // Validate Customer only if it is a non-internal product
@@ -183,6 +192,12 @@ public class AccountServiceImpl implements AccountService {
         List<LoanDetails> loanDetailsList = loanDetailsRepo.findAllBySettlementAccount(account);
         if(!loanDetailsList.isEmpty())
             throw new BadRequestException("Cannot close the account linked as Settlement Account");
+
+        List<FixedDepositDetails> fundingAccountList = fixtureRepo.findAllByFundingAccount(account);
+        List<FixedDepositDetails> payAwayAccountsList = fixtureRepo.findAllByPayAwayAccount(account);
+
+        if(!fundingAccountList.isEmpty() || !payAwayAccountsList.isEmpty())
+            throw new BadRequestException("Cannot close the account linked as Funding/Pay Away Account");
 
         // Update Account Blocked Balance
         account.setBlockedBalance(BigDecimal.ZERO);

@@ -1,6 +1,7 @@
 package com.fincorex.corebanking.batch.arrearsprocessing;
 
 import com.fincorex.corebanking.entity.ArrearsProcessingTag;
+import com.fincorex.corebanking.exception.BadRequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
@@ -105,6 +106,9 @@ public class ArrearsProcessingBatchConfig {
                 .reader(reader)
                 .processor(processor)
                 .writer(writer)
+                .faultTolerant()
+                .skip(BadRequestException.class)
+                .skipLimit(10)   // allow up to 10 skips in this step
                 .build();
     }
 

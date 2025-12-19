@@ -55,11 +55,16 @@ public class TransactionUtils {
                 throw new BadRequestException("Debit Credit Flag should be 'D' or 'C'");
             if(loanDetails.isPresent() && !transactionCode.name().equals(TransactionCode.LD0.name()) && !transactionCode.name().equals(TransactionCode.RPO.name()))
                 throw new BadRequestException("Only Loan Repayment and Disbursement Transaction is allowed on the Loan Account");
+
             String productType = account.get().getSubProduct().getProduct().getProductType();
             BigDecimal availableBalance = account.get().getClearedBalance().subtract(account.get().getBlockedBalance());
             if(productType.equals(ProductType.SA.name()) && transactionDetail.getDebitCreditFlag() == 'D' && transactionDetail.getAmount().compareTo(BigDecimal.ZERO) != 0 &&
                     transactionDetail.getAmount().abs().compareTo(availableBalance) > 0)
                 throw new BadRequestException("Overdraw is not allowed on Savings Account");
+
+            if(productType.equals(ProductType.FD.name()) && !transactionCode.name().equals(TransactionCode.FD0.name()) && !transactionCode.name().equals(TransactionCode.I00.name())
+                    && !transactionCode.name().equals(TransactionCode.FD1.name()))
+                throw new BadRequestException("Only Fixture Deposit and Fixture Withdrawal Transactions are allowed on FD Accounts");
 
             if(account.get().getIsClosed())
                 throw new BadRequestException("Transaction Failed. Account : "+ transactionDetail.getAccountID()+" is closed");
