@@ -20,7 +20,7 @@ public class FixtureMaturityScheduler {
     @Autowired
     private FixtureServiceImpl fixtureService;
 
-    @Scheduled(cron = "1 0 0 * * *")
+    @Scheduled(cron = "0 0 1 * * *")
     public void processFixtureMaturity() throws BadRequestException, AccountNotFoundException {
         List<FixedDepositDetails> fixedDepositDetailsList = fixtureRepo.findAllByFixtureStatus(FixtureStatus.NORMAL.name());
         for(FixedDepositDetails fixedDepositDetails : fixedDepositDetailsList){
